@@ -1,6 +1,8 @@
 import { ethers, providers } from "ethers";
 // import Web3Modal from "web3modal"
 
+export let address; 
+
 export const connectWallet = (web3modalRef) => {
     getProviderOrSigner(web3modalRef); 
 }
@@ -25,6 +27,6 @@ const getProviderOrSigner = async (web3modal) => {
   }
 
   const signer = web3Provider.getSigner(); 
-  const address = await signer.getAddress(); 
+  address = await signer.getAddress(); 
   console.log("Address: ", address); 
 }
