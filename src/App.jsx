@@ -47,10 +47,8 @@ function App() {
     let ens = await web3Provider.lookupAddress(address); 
 
     if (ens){
-      console.log('ENS: ', ens)
       setEns(ens)
     } else {
-      console.log('Address: ', address)
       setAddressMain(address)
     }
   }
@@ -74,13 +72,21 @@ function App() {
       <h1>ENS NAME</h1>
       <p>Connect your wallet to see your ENS name</p>
       <div className="card">
-        <button onClick={ () => connectWallet(web3ModalRef)}>
-          Connect wallet
-        </button>
+      {
+        !walletConnected ? (
+          <button onClick={ () => connectWallet(web3ModalRef)}>
+            Connect wallet
+          </button>
+        ) : (
+          ens ? (
+            <p>Your ENS is: <b>{ens}</b> </p>
+          ) : (
+            <p>You have no ENS. Buy one now over <a href='https://app.ens.domains/'>here</a></p>
+          )
+          
+        )
+      }
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
